@@ -6,7 +6,7 @@
 - Lớp: `L3A` / `L3B`: `L3B`
 - Repo của bàn: `K5-<L3A|L3B>-DAY10-<TenNhom>-PoCtoPilotGate1`:
   `K5-L3B-DAY10-4anhchang-PoCtoPilotGate1`
-- Thẻ sự cố đã bốc (S1–S8):
+- Thẻ sự cố đã bốc (S1–S8): S7
 
 ## Thành viên
 
@@ -87,12 +87,12 @@ Vận hành và pháp lý: HAZOP, checklist 9 nhóm, cổng `operations` và `le
 
 ### Đóng góp cụ thể
 
-Đã hoàn thành phân tích HAZOP vòng 1 cho tool `issue_refund` (Phiếu B mục B4); rà soát và điền Checklist 9 nhóm việc có PIC đích danh (mục B5); cấu hình mục `operations` và `legal` trong `config/operating_gates.json`; hoàn thiện Runbook phần 1–3 (mục B7.5) và quy trình xử lý Giờ cao điểm (mục B7.6).
+Hoàn thành phân tích HAZOP vòng 1 cho tool `issue_refund` (Phiếu B mục B4); rà soát Checklist 9 nhóm việc có PIC đích danh (mục B5); cấu hình mục `operations` và `legal` trong `config/operating_gates.json`; hoàn thiện Runbook phần 1–3 (mục B7.5) và quy trình xử lý Giờ cao điểm (mục B7.6). Phối hợp giải quyết sự cố S7 (rò rỉ dữ liệu cá nhân PII của người nhận quà): phân tích rủi ro pháp lý theo Nghị định 13/2023/NĐ-CP, cập nhật allowlist bảo vệ PII, hoàn thiện Runbook phần 4–5 và kiểm tra gom bài nộp `submission.json` đạt ĐỦ THÀNH PHẦN.
 
 ### Bằng chứng
 
-Mã commit: (commit cập nhật Khối 2A/2B) · Dòng trong phiếu: B4, B5, B7.5, B7.6 · File: `config/operating_gates.json`
+Mã commit: `1e29321`, `91f544d` · Mã lần chạy: `R-S7-grade-20261119-164320-b53f96` · Dòng trong phiếu: B4, B5, B7.5, B7.6, C4, C10, C11, C12 · File: `config/operating_gates.json`, `submission/submission.json`
 
 ### Exit ticket
 
-Một điều học được: Khi đưa AI vào thực tế, các rào chắn vận hành và pháp lý (SLA duyệt ca, phân công PIC, hạn mức PII, công tắc dừng khẩn cấp) mang tính sống còn để kiểm soát rủi ro không thể đảo ngược. · Một điều còn chưa chắc: Liệu trong sự cố vòng 2, lượng ticket dồn dập có làm hàng chờ CSKH bị quá tải vượt quá công suất 6 ca/giờ của ca trực hay không.
+Một điều học được: Khi xử lý sự cố lộ dữ liệu cá nhân (PII), cách tiếp cận bảo đảm bằng allowlist nghiêm ngặt tại cổng ra (write gate) hiệu quả và an toàn tuyệt đối hơn việc cố gắng dùng regex để che mờ dữ liệu. · Một điều còn chưa chắc: Việc áp dụng allowlist khắt khe có thể khiến đối tác vận chuyển thiếu thông tin liên lạc trong các trường hợp giao hàng khẩn cấp hay không.

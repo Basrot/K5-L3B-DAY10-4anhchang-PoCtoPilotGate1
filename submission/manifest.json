@@ -1,23 +1,23 @@
 {
-<<<<<<< Updated upstream
- "collected_at": "2026-11-19T16:47:54",
-=======
- "collected_at": "2026-11-19T16:51:17",
->>>>>>> Stashed changes
+ "collected_at": "2026-11-19T16:45:13",
  "incident": "S7",
- "run_ids": {},
- "grade_run_id": null,
- "criteria_hash": "7b3d703098a654629520168a3b60b4ccd59252d309f3280ec02c3d557a0f313a",
+ "run_ids": {
+  "base": "R-S7-before-20261119-164320-b53f96",
+  "prepared": "R-S7-prepared-20261119-164320-b53f96",
+  "after": "R-S7-after-20261119-164320-b53f96"
+ },
+ "grade_run_id": "R-S7-grade-20261119-164320-b53f96",
+ "criteria_hash": "6010d6894cabbfc22b43dd60130b98797e4ad6870642a39f464f952c16e5cb33",
  "round1_hash": "3ea4677be02f98acdf76a0ee35d8670c22fe65ec55a89aa6e45d8426c6a2e0a5",
  "code_hash": "b53f964fc93ff6e3e4035e1acb9663268dba89dd45e6aa8f505fba1d9513b952",
  "files": {
   "code/guards.py": "bee048221c931abe86167cf20909c1b988b73df9d68182e90d60ed709fa8e0ed",
-  "code/guards_round1.py": "bee048221c931abe86167cf20909c1b988b73df9d68182e90d60ed709fa8e0ed",
+  "code/guards_round1.py": "ed4b4136848fb7179bb847f1484510ec11322ea8873c44695e5ebe79d99cc428",
   "code/monitors.py": "8d7273703a76a260a25cdef0162daae3e397f752dc812f5c31645b648c9c2238",
-  "config/acceptance_criteria.json": "7b3d703098a654629520168a3b60b4ccd59252d309f3280ec02c3d557a0f313a",
-  "config/acceptance_criteria.lock": "928d04f849e77e370eee16e975e682b2ee421fc1d70134b261e7fe23a5ebd65f",
+  "config/acceptance_criteria.json": "6010d6894cabbfc22b43dd60130b98797e4ad6870642a39f464f952c16e5cb33",
+  "config/acceptance_criteria.lock": "89af853ae653d72dfa5d23dbce515d9f90689f7163b3978c32bea88609f926fc",
   "config/operating_gates.json": "bc44b2ecadbaec7ee7c3746d8f970ec3f15ba26e9cec6f8b57c0bdecff7e1a96",
-  "config/operating_gates.round1.json": "bc44b2ecadbaec7ee7c3746d8f970ec3f15ba26e9cec6f8b57c0bdecff7e1a96",
+  "config/operating_gates.round1.json": "5b5322b10bce04e71749ea6ebfd031607bdfbdf08501ce62f48454d7e047854b",
   "config/round1.lock": "f7ab2c2a62b39110c6ec907fb60be6bba0a42659d8d16a467a285aea905df732",
   "config/switches.json": "9fcdb809437346392c6ded442f4f562c357ef89a7688a454505f94bcd969866b",
   "docs/form-a-criteria.md": "8c20bcd6940629612dd6509474fd3ea081e7b71094048585a55af22c62623a4e",
@@ -25,7 +25,7 @@
   "docs/form-c-incident.md": "1cc926cdb1484270e061108b4a4121dc79f39a51987c6deb662799654e487025",
   "runs/grade-report.json": "005a94020ddf31b82279d6c2e204ed34ded01b997861b6231aaa28574a58a436",
   "runs/grade-report.md": "e7261ee56fba700086b428b78d2b56effd591833c31d778c77667c4bef9237dd",
-  "runs/journal.jsonl": "1ac0937802e853739b607b99e767e67ff9937ce26d9cf9351c8060bbdd04e299",
+  "runs/journal.jsonl": "0c9f4ae663512701f96ce399316477462e14a74fe49e2bdf77035b26bfbef13b",
   "runs/R-S7-after-20261119-164320-b53f96/report.json": "3eecab35156b7bd68c187e9ec6473861b950671d810a06e581a01f46819c790b",
   "runs/R-S7-before-20261119-164320-b53f96/report.json": "fbc88e8405db43f4a4977c053113c1e54b4549ce72d8481d74974808f41eae87",
   "runs/R-S7-prepared-20261119-164320-b53f96/report.json": "4822001f07735e7a91a3883f39e56269dcbdb3acd18549c682e2acea91dea6aa",
