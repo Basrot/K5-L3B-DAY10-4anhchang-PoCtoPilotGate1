@@ -251,11 +251,10 @@ Bốn lăng kính (bắt buộc đủ cả bốn; dự án AI hay chết ở ba 
 
 | Lý do thất bại (viết ở thì quá khứ) | Lăng kính | Kiểm được hôm nay? (trace / data / config nào) | Thành cổng phòng ngừa nào (code hay config) / hay vào risk register |
 |---|---|---|---|
-| | Kỹ thuật | | |
-| | Kinh doanh | | |
-| | Con người và vận hành | | |
-| | Pháp lý | | |
-| | | | |
+| Trợ lý đã tin con số ngày trễ khách tự khai (như ca `T-002@55`) thay vì đối chiếu tracking DB, dẫn đến hoàn tiền sai hàng loạt và phạt oan đối tác vận chuyển. | Kỹ thuật | Trace ca `T-002@55` (sự kiện `model_override.field=delay_days`) và report mốc base. | Thành cổng code `write_gate` trong `guards.py` đối chiếu `H.entitlement_vnd` từ tracking DB trước khi ghi sổ cái (Tầng Chặn). |
+| Tổng số tiền hoàn tự động trong ngày vượt quá ngân sách Finance cho phép (2.000.000đ/ngày) do nhiều ca trễ dồn vào đợt sale, gây thâm hụt tài chính công ty. | Kinh doanh | `data/world.json` mục `ops_limits.daily_auto_refund_budget_vnd` và khối kinh doanh trong report. | Thành cổng cấu hình `business.daily_refund_cap_vnd: 2000000` và guard chuyển người duyệt khi chạm trần. |
+| Lượng ticket chuyển người duyệt tăng vọt trong giờ cao điểm vượt công suất 6 ca/giờ của nhân viên trực ca (`NV-HANH`), làm hàng chờ nghẽn trên 120 phút (vượt xa SLA 60 phút); nhân viên CSKH mất niềm tin vào trợ lý vì phải đi sửa sai các ca mơ hồ. | Con người và vận hành | `data/world.json` mục `ops_facts.review_capacity_per_reviewer_per_hour` và khối kinh doanh/vận hành trong report. | Cấu hình `operations.max_queue_wait_minutes: 60`, `review_capacity_per_hour: 6` và quy trình kích hoạt nhân viên trực standby trong Runbook B7.6. |
+| Trợ lý gửi kèm thông tin cá nhân nhạy cảm (số điện thoại, họ tên, địa chỉ nhà riêng) của khách hàng sang hãng vận chuyển trong lệnh `notify_carrier`, vi phạm Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân và bị đối tác/khách hàng khiếu nại pháp lý. | Pháp lý | Sự kiện gọi tool `notify_carrier` trong trace; cấu hình `legal.pii_fields_blocked_to_third_party`. | Thành cổng cấu hình `legal.pii_fields_blocked_to_third_party: ["phone", "customer_name", "street"]` và cổng `write_gate` lọc bỏ toàn bộ PII trước khi gọi tool. |
 
 ---
 
