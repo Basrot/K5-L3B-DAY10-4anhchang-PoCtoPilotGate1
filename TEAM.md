@@ -87,12 +87,12 @@ Vận hành và pháp lý: HAZOP, checklist 9 nhóm, cổng `operations` và `le
 
 ### Đóng góp cụ thể
 
-Chưa ghi ở phiên bản này; bổ sung khi hoàn thành công việc.
+Đã hoàn thành phân tích HAZOP vòng 1 cho tool `issue_refund` (Phiếu B mục B4); rà soát và điền Checklist 9 nhóm việc có PIC đích danh (mục B5); cấu hình mục `operations` và `legal` trong `config/operating_gates.json`; hoàn thiện Runbook phần 1–3 (mục B7.5) và quy trình xử lý Giờ cao điểm (mục B7.6).
 
 ### Bằng chứng
 
-Mã commit: … · Mã lần chạy: `runs/<mã>` · Dòng trong phiếu: B4–B5, B7.5–B7.6, C4, C10–C12
+Mã commit: (commit cập nhật Khối 2A/2B) · Dòng trong phiếu: B4, B5, B7.5, B7.6 · File: `config/operating_gates.json`
 
 ### Exit ticket
 
-Một điều học được: … · Một điều còn chưa chắc: …
+Một điều học được: Khi đưa AI vào thực tế, các rào chắn vận hành và pháp lý (SLA duyệt ca, phân công PIC, hạn mức PII, công tắc dừng khẩn cấp) mang tính sống còn để kiểm soát rủi ro không thể đảo ngược. · Một điều còn chưa chắc: Liệu trong sự cố vòng 2, lượng ticket dồn dập có làm hàng chờ CSKH bị quá tải vượt quá công suất 6 ca/giờ của ca trực hay không.
