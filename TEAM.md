@@ -4,7 +4,7 @@
 
 - Tên nhóm (`TenNhom`, không dấu, không khoảng trắng): `4anhchang`
 - Lớp: `L3A` / `L3B`: `L3B`
-- Repo của bàn: `K5-<L3A|L3B>-DAY10-<TenNhom>-PoCtoPilotGate1`
+- Repo của bàn: `K5-<L3A|L3B>-DAY10-<TenNhom>-PoCtoPilotGate1`:
   `K5-L3B-DAY10-4anhchang-PoCtoPilotGate1`
 - Thẻ sự cố đã bốc (S1–S8):
 
