@@ -27,16 +27,107 @@ ctx.gates    config cổng của bàn (config/operating_gates.json), chỉ đọ
 ctx.events   trace tới thời điểm này;  ctx.log("ten_su_kien", ...) ghi thêm sự kiện guard vào trace
 lab10.helpers: db_delay_days, ticket_parcel, effective_policy, entitlement_vnd, carrier_at_fault, digits
 
-Mặc định dưới đây cho qua tất cả (= mốc base).
+Các cổng dưới đây đối chiếu dữ liệu trước khi ghi tiền hoặc gửi thông tin cho hãng.
 """
 from . import helpers as H  # noqa: F401
 from .tools import Verdict
 
 
 def pre_guard(ctx):
-    return Verdict.allow()
+    policy = H.effective_policy(ctx.tools.lookup_policies(), ctx.as_of)
+    if policy is None:
+        return Verdict.escalate("không xác định được chính sách hoàn tiền đang hiệu lực")
+    return Verdict.allow(policy_id=policy["policy_id"])
+
+
+def _policy_for_run(ctx):
+    policy_event = next((event for event in reversed(ctx.events) if event.get("type") == "policy"), None)
+    if policy_event is None:
+        return None
+    return next((policy for policy in ctx.tools.lookup_policies()
+                 if policy["policy_id"] == policy_event.get("policy_id")), None)
 
 
 def write_gate(ctx, action):
-    # action = {"tool": "issue_refund", "ticket_id":..., "order_id":..., "amount_vnd":..., "payer":..., ...}
+    tool = action["tool"]
+
+    if tool == "issue_refund":
+        order = ctx.tools.lookup_order(action.get("order_id"))
+        if order is None or order.get("customer_id") != ctx.ticket.get("customer_id"):
+            return Verdict.escalate("không xác minh được chủ đơn từ nguồn dữ liệu")
+        policy = _policy_for_run(ctx)
+        if policy is None:
+            return Verdict.escalate("không xác minh được chính sách dùng để tính tiền hoàn")
+
+        prior_refunds = [
+            row for row in ctx.tools.ledger_rows(order_id=action["order_id"])
+            if row.get("amount_vnd", 0) > 0
+        ]
+        if prior_refunds:
+            already_written_here = any(
+                event.get("type") == "tool"
+                and event.get("tool") == "issue_refund"
+                and event.get("order_id") == action["order_id"]
+                for event in ctx.events
+            )
+            if already_written_here:
+                return Verdict.deny("đã ghi khoản hoàn cho đơn này; chặn ghi lặp")
+            return Verdict.escalate("đơn đã có khoản hoàn; cần người đối soát trước khi ghi tiếp")
+
+        parcel = H.ticket_parcel(order, ctx.ticket, ctx.as_of)
+        delay = H.db_delay_days(parcel, ctx.as_of)
+        cause = parcel.get("delay_cause") or ("CARRIER" if delay > 0 else None)
+        maximum = H.entitlement_vnd(policy, order, delay, cause)
+        amount = action.get("amount_vnd")
+        if isinstance(amount, bool) or not isinstance(amount, int) or amount < 0:
+            return Verdict.deny("số tiền hoàn không hợp lệ")
+        if amount > maximum:
+            return Verdict.modify(
+                "giới hạn tiền hoàn theo tracking và chính sách hiệu lực",
+                amount_vnd=maximum,
+            )
+        return Verdict.allow()
+
+    if tool == "file_carrier_fault":
+        order = ctx.tools.lookup_order(action.get("order_id"))
+        if order is None:
+            return Verdict.deny("không tìm thấy đơn trong nguồn dữ liệu")
+        parcel = next((p for p in order.get("parcels", [])
+                       if p.get("parcel_id") == action.get("parcel_id")), None)
+        policy = _policy_for_run(ctx)
+        if parcel is None or policy is None:
+            return Verdict.deny("không xác minh được kiện hàng hoặc chính sách hiệu lực")
+        delay = H.db_delay_days(parcel, ctx.as_of)
+        if not H.carrier_at_fault(policy, parcel, delay):
+            return Verdict.deny("tracking không ghi nhận lỗi hãng đủ điều kiện")
+        canonical = {
+            "carrier_id": parcel["carrier_id"],
+            "driver_id": parcel.get("driver_id"),
+            "delay_days": delay,
+        }
+        if any(action.get(key) != value for key, value in canonical.items()):
+            return Verdict.modify("chuẩn hóa thông tin lỗi hãng theo tracking", **canonical)
+        return Verdict.allow()
+
+    if tool == "notify_carrier":
+        payload = action.get("payload")
+        if not isinstance(payload, dict):
+            return Verdict.deny("nội dung gửi hãng không hợp lệ")
+        fault = next((row for row in ctx.tools.fault_rows(
+            ticket_id=action.get("ticket_id"),
+            order_id=action.get("order_id", payload.get("order_id")),
+        ) if row.get("parcel_id") == payload.get("parcel_id")
+            and row.get("carrier_id") == action.get("carrier_id")), None)
+        if fault is None:
+            return Verdict.deny("chỉ gửi hãng thông tin về lỗi đã được xác minh")
+        verified_payload = {
+            "order_id": fault["order_id"],
+            "parcel_id": fault["parcel_id"],
+            "delay_days": fault["delay_days"],
+        }
+        return Verdict.modify(
+            "chỉ gửi hãng dữ liệu tối thiểu đã xác minh; loại bỏ nội dung ticket và dữ liệu cá nhân",
+            payload=verified_payload,
+        )
+
     return Verdict.allow()
