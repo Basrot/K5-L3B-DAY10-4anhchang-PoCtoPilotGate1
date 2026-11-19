@@ -33,15 +33,15 @@ Kỹ sư cổng: viết cổng trong `lab10/guards.py`; chủ trì các cổng v
 
 ### Đóng góp cụ thể
 
-Đã chạy bài kiểm tra công khai, mốc base, gate đối chiếu tiêu chí và trace `T-002@55`; điền Phiếu B mục B0–B2; hoàn thành offline metric cho bước chọn độ trễ.
+Đã chủ trì thiết kế và chốt cổng vòng 1 trong `lab10/guards.py`, bao gồm ghim chính sách theo `as_of`, kiểm tra hoàn trùng và hạn mức/tài liệu tracking, chuẩn hóa lỗi hãng và allowlist dữ liệu gửi carrier; hoàn thiện runbook phần cổng phòng ngừa, công tắc dừng khẩn cấp và Quyết định Gate 1 vòng 1; chạy/đối chiếu báo cáo base, after và trace `T-002@55`.
 
 ### Bằng chứng
 
-Mã commit: … · Mã lần chạy: `runs/<mã>` · Dòng trong phiếu: B7.1–B7.3
+Mã commit: `9395859`, `f3ac175` · Mã lần chạy: `R-base-after-20261119-161030-b3b3af` · Dòng trong phiếu: B7.1–B7.3 · File: `lab10/guards.py`
 
 ### Exit ticket
 
-Một điều học được: … · Một điều còn chưa chắc: …
+Một điều học được: Cổng ở bên ngoài model cần đối chiếu trực tiếp nguồn sự thật (tracking, policy, ledger) thay vì tin dữ liệu do agent hoặc khách tự khai. · Một điều còn chưa chắc: Ngưỡng cho công tắc dừng khẩn cấp và dung sai tự động hóa khi pilot mở rộng nhiều kho/luồng ngoài dữ liệu giả.
 
 ## NguyenGiaNam-2A202603761
 
