@@ -59,7 +59,7 @@ Mã commit: `7b22e51` · Mã lần chạy: `R-base-before-20261119-153147-bde05c
 
 ### Exit ticket
 
-Một điều học được: Mốc báo cáo và trace giúp tìm ra bước sai cụ thể thay vì chỉ nhìn tổng pass_rate. · Một điều còn chưa chắc: Cách cổng vòng 1 của Người 1 xử lý chênh lệch độ trễ sẽ cần kiểm tra lại bằng trace `--stage after`.
+Một điều học được: Mốc báo cáo và trace giúp tìm ra bước sai cụ thể thay vì chỉ nhìn tổng pass_rate; chỉ số theo dõi phải tính từ dữ liệu production không nhãn, chứ không dùng nhãn đúng/sai. · Một điều còn chưa chắc: Khi chạy pilot thật, monitor PII có phát hiện đúng PII ở mọi kênh outbound hay chỉ phát hiện được những trường đã được trace ghi lại.
 
 ## DaoNgocHan-2A202603779
 
