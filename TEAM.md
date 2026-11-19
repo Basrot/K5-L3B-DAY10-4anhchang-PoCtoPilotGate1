@@ -33,7 +33,7 @@ Kỹ sư cổng: viết cổng trong `lab10/guards.py`; chủ trì các cổng v
 
 ### Đóng góp cụ thể
 
-Chưa ghi ở phiên bản này; bổ sung khi hoàn thành công việc.
+Đã chạy bài kiểm tra công khai, mốc base, gate đối chiếu tiêu chí và trace `T-002@55`; điền Phiếu B mục B0–B2; hoàn thành offline metric cho bước chọn độ trễ.
 
 ### Bằng chứng
 
@@ -55,11 +55,11 @@ Chưa ghi ở phiên bản này; bổ sung khi hoàn thành công việc.
 
 ### Bằng chứng
 
-Mã commit: … · Mã lần chạy: `runs/<mã>` · Dòng trong phiếu: B0–B2, C1–C2, C8
+Mã commit: `a5013c7` · Mã lần chạy: `R-base-before-20261119-153147-bde05c` · Dòng trong phiếu: A2, B0–B2, C1–C2, C8
 
 ### Exit ticket
 
-Một điều học được: … · Một điều còn chưa chắc: …
+Một điều học được: Mốc báo cáo và trace giúp tìm ra bước sai cụ thể thay vì chỉ nhìn tổng pass_rate. · Một điều còn chưa chắc: Cách cổng vòng 1 của Người 1 xử lý chênh lệch độ trễ sẽ cần kiểm tra lại bằng trace `--stage after`.
 
 ## DaoNgocHan-2A202603779
 
