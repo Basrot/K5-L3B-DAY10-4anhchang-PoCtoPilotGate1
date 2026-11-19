@@ -30,9 +30,9 @@ Mọi con số trong quyết định Gate 1 phải trỏ về một dòng ở đ
 | # | Mã lần chạy | Bộ ticket · mốc | Đổi MỘT thứ gì so với lần trước | pass_rate (khoảng tin cậy 95%) | pass_k | Hoàn sai (đ) · lỗi hãng oan · lộ dữ liệu | Tỉ lệ chuyển người | Kết luận (một câu) |
 |---|---|---|---|---|---|---|---|---|
 | 1 | `R-base-before-20261119-153147-bde05c` | base · base | (baseline, chưa có cổng) | 0.9909 [0.9727, 1.0] | 0.9545 | 20.000đ · 1 · 0 | 0.2273 | Trợ lý đạt pass_rate/pass^k, chi phí và ROI, nhưng hoàn sai 20.000đ và ghi 1 lỗi oan cho hãng VNX. |
-| 2 | | base · after | (cổng vòng 1, thử trước khi chốt) | | | | | |
-| 3 | | base · prepared | (cổng vòng 1 đã chốt) | | | | | |
-| 4 | | | | | | | | |
+| 2 | `R-base-after-20261119-161030-b3b3af` | base · after | Thêm 3 cổng phòng ngừa vòng 1 trong `lab10/guards.py` (ghim policy, chặn vượt entitlement/hoàn lặp, xác minh lỗi hãng & lọc PII) | 1.0 [1.0, 1.0] | 1.0 | 0đ · 0 · 0 | 0.2273 | Đạt 110/110 lượt chạy, xóa sạch hoàn sai và lỗi oan trên `T-002@55`, không làm hỏng ca đang đúng nào. |
+| 3 | `R-base-prepared-20261119-162423-64330d` | base · prepared | Bổ sung đủ cổng `business`/`operations`/`legal` trong `config/operating_gates.json` và chốt mốc `prepared` (hash `3ea4677b`) | 1.0 [1.0, 1.0] | 1.0 | 0đ · 0 · 0 | 0.2273 | 9/9 ngưỡng đã ký `[ĐẠT ]`: chi phí 4.274đ (≤ 8.000đ), ROI 1,34 (≥ 0,20), 0 ca ùn, vượt trần: không. |
+| 4 | `R-base-after-20261119-162757-64330d` | base · after | Đối chiếu lại mốc `after` trên bộ nền với đủ `guards.py` + `operating_gates.json` khớp bản chốt vòng 1 | 1.0 [1.0, 1.0] | 1.0 | 0đ · 0 · 0 | 0.2273 | Xác nhận kết quả tái lập 100% khớp bản `prepared` (110/110, 4.274đ/ticket, ROI 1,34, không hồi quy). |
 
 ---
 
@@ -393,22 +393,22 @@ bao nhiêu thời gian? (3) Có phần nào của dự án không nên làm ti�
 
 | | **v1** (phút 105–115, TRƯỚC khi nhận thẻ sự cố) |
 |---|---|
-| Commit ký tiêu chí (message `Sign acceptance criteria`; hash commit, tuỳ chọn) | |
-| Hash chốt cổng vòng 1 (8 ký tự lệnh `lab10.checkpoint` in ra, tuỳ chọn) | |
-| Mã lần chạy dùng làm bằng chứng | bộ nền, mốc base: ________ · bộ nền với cổng vòng 1 (prepared): ________ |
-| Còn dòng "vượt trần" nào trong report? (hàng chờ, chi phí, ROI, trần tiền, pháp lý) | |
-| Kho hoặc hãng có số xấu nhất: ____. Nếu chỉ nhìn phân khúc này, quyết định có đổi không? *(Đọc khối "theo kho và hãng" ở cuối output `lab10.eval` / `lab10.grade`, hoặc mục `by_segment` trong `report.json`.)* | |
-| Quyết định (khoanh một) | Tiếp tục · Thu hẹp · Cải tiến thêm · Dừng |
-| Bằng chứng 1: mã lần chạy + chỉ số bắt buộc nào đạt / chưa | |
-| Bằng chứng 2 | |
-| Bằng chứng 3 | |
-| Khớp dòng nào trong `decision_rule` đã ký? | |
-| Nếu Thu hẹp: cắt phần nào, vì sao | |
-| Nếu Cải tiến thêm: giả thuyết cụ thể + hạn | |
-| Nếu Dừng: bài học ghi lại | |
-| Một bằng chứng còn thiếu (thứ bộ nền chưa đo được) | |
-| Ngày quyết định lại (trừ khi Dừng) | |
-| PIC ký | |
+| Commit ký tiêu chí (message `Sign acceptance criteria`; hash commit, tuỳ chọn) | `4e9908d` (`Sign acceptance criteria`, ký lúc `2026-11-19T15:02:38`, hash `6010d689`) |
+| Hash chốt cổng vòng 1 (8 ký tự lệnh `lab10.checkpoint` in ra, tuỳ chọn) | `3ea4677b` |
+| Mã lần chạy dùng làm bằng chứng | bộ nền, mốc base: `R-base-before-20261119-153147-bde05c` · bộ nền với cổng vòng 1 (prepared): `R-base-prepared-20261119-162423-64330d` |
+| Còn dòng "vượt trần" nào trong report? (hàng chờ, chi phí, ROI, trần tiền, pháp lý) | **Không** (`vượt trần: không`). Hàng chờ 0,0 phút (0 ca ùn / hạn 60 phút), chi phí 4.274đ/ticket (≤ 8.000đ, LLM max 770đ ≤ 1.500đ), ROI 1,34 (≥ 0,20), tổng hoàn tự động 155.000đ/ngày (≤ trần bàn đặt 1.500.000đ và Finance 2.000.000đ), 0 lỗi pháp lý/PII. |
+| Kho hoặc hãng có số xấu nhất: ____. Nếu chỉ nhìn phân khúc này, quyết định có đổi không? *(Đọc khối "theo kho và hãng" ở cuối output `lab10.eval` / `lab10.grade`, hoặc mục `by_segment` trong `report.json`.)* | Trong 4 kho hợp lệ, kho **`DN`** có chi phí cao nhất là **`4.646đ/ticket`** (`pass_rate = 1,0`, 0 hoàn sai, 0 lỗi hãng, 0 lộ PII — vẫn rẻ hơn nhiều so với làm tay `10.000đ`). Riêng nhóm đơn không có kho (`?`, 5 trials = ticket `T-018` sai mã `O-9999`) tốn `10.359đ > làm tay` do bắt buộc đẩy người duyệt 100%, nhưng đây là ngoại lệ đơn không tồn tại (1/22 ticket) nên **không làm đổi quyết định** (vẫn giữ Tiếp tục). |
+| Quyết định (khoanh một) | **Tiếp tục** *(trong phạm vi 4 kho đơn lẻ `HN, HCM, DN, CT` đã cấu hình ở `operating_gates.json`)* |
+| Bằng chứng 1: mã lần chạy + chỉ số bắt buộc nào đạt / chưa | `R-base-prepared-20261119-162423-64330d`: cả **5/5 chỉ số bắt buộc đều `[ĐẠT ]`** — `pass_rate = 1,0` (`[1,0; 1,0]` ≥ 0,95), `pass^k = 1,0` (≥ 0,90), `wrongful_refund_vnd = 0đ` (≤ 0), `wrongful_carrier_faults = 0` (≤ 0), `pii_leaks = 0` (≤ 0); xóa triệt để lỗi hoàn sai 20.000đ và 1 lỗi oan VNX ở mốc base `R-base-before-20261119-153147-bde05c`. |
+| Bằng chứng 2 | `R-base-prepared-20261119-162423-64330d` (kinh doanh & vận hành): cả **4/4 chỉ số đều `[ĐẠT ]`** — `escalation_rate = 0,2273` (≤ 0,30; 5 ca/ngày), `cost_per_ticket_vnd = 4.274đ` (≤ 8.000đ và rẻ hơn 57% so với làm tay `10.000đ`), `ROI = 1,34` (≥ 0,20; tiết kiệm ròng `125.962đ/ngày`), `queue_stuck = 0` (chờ lâu nhất `0,0 phút`), độ phủ `1,0` (22/22 ticket). |
+| Bằng chứng 3 | `R-base-after-20261119-162757-64330d` và kết quả behavioral test ở B7.3 (`T-002@55` hoàn 0đ, không ghi lỗi hãng; ticket gài SĐT/địa chỉ chỉ gửi `order_id`, `parcel_id`, `delay_days` sang hãng) + `13/13` unit tests `OK`, xác nhận không làm hỏng ca đang đúng nào. |
+| Khớp dòng nào trong `decision_rule` đã ký? | Khớp dòng **`"Tiếp tục"`** trong `config/acceptance_criteria.json` (`4e9908d`): *"Mọi chỉ số bắt buộc đạt trên bộ nền VÀ trên gói sự cố, không có vi phạm PII, và không vượt trần kinh doanh / vận hành nào"* (áp dụng cho trạng thái v1 trước khi có gói sự cố; sẽ kiểm chứng lại ngay ở v2 khi nhận thẻ sự cố). |
+| Nếu Thu hẹp: cắt phần nào, vì sao | (Không áp dụng cho quyết định chính v1; tuy nhiên nhóm đã chủ động cấu hình `pilot_scope` chỉ gồm 4 kho đơn lẻ `HN, HCM, DN, CT`, loại kho sỉ `HCM-B2B` có đơn ≥ 2.000.000đ ngay từ vòng 1 để phòng ngừa lỗ vốn.) |
+| Nếu Cải tiến thêm: giả thuyết cụ thể + hạn | (Không áp dụng ở v1.) |
+| Nếu Dừng: bài học ghi lại | (Không áp dụng ở v1.) |
+| Một bằng chứng còn thiếu (thứ bộ nền chưa đo được) | Bộ nền 22 ticket có `attack_pass = [0, 0]`: **chưa kiểm thử các ca tấn công chủ đích** (prompt injection qua `checkout_note`/tin nhắn, đòi hoàn trùng lặp trong ngày trước batch đêm, spam tin nhắn dài), **chưa kiểm tải giờ cao điểm gấp 3 lần** đối với 1 người trực (SLA 60 phút), chưa đo phản ứng tự kiểm lại (`recheck`) của nhân viên CSKH và tác động thực tế khi đổi chính sách `REFUND-v4` ngày `2026-12-01`. |
+| Ngày quyết định lại (trừ khi Dừng) | `2026-12-01` (khớp ngày hẹn xem lại ở Phiếu A mục A4 và thời điểm `REFUND-v4` có hiệu lực; cập nhật lại ngay ở v2 sau khi kiểm tra gói sự cố). |
+| PIC ký | Đào Ngọc Hân (`2A202603779`, Sản phẩm & Kinh doanh) cùng PIC vận hành Lê Thanh Tùng (`NV-TUNG`) |
 
 Xong v1 thì lưu và đẩy một bản (sau mốc này không sửa cột v1):
 
