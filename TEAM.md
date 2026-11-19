@@ -51,11 +51,11 @@ Kỹ sư cổng phụ trách đo lường và phân tích trace: chạy các m�
 
 ### Đóng góp cụ thể
 
-Chưa ghi ở phiên bản này; bổ sung khi hoàn thành công việc.
+Đã chạy bài kiểm tra công khai, mốc base, gate đối chiếu tiêu chí và trace `T-002@55`; điền Phiếu B mục B0–B2; hoàn thành offline metric cho bước chọn độ trễ.
 
 ### Bằng chứng
 
-Mã commit: `a5013c7` · Mã lần chạy: `R-base-before-20261119-153147-bde05c` · Dòng trong phiếu: A2, B0–B2, C1–C2, C8
+Mã commit: `7b22e51` · Mã lần chạy: `R-base-before-20261119-153147-bde05c` · Dòng trong phiếu: A2, B0–B2, C1–C2, C8
 
 ### Exit ticket
 
