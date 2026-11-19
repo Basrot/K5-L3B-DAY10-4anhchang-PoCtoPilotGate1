@@ -1,12 +1,17 @@
 {
-  "team": "",
-  "members": [],
-  "incident": "",
-  "decision_v1": "",
-  "decision_v2": "",
+  "team": "K5-L3B-DAY10-4anhchang-PoCtoPilotGate1",
+  "members": [
+    "ThieuTheNgoc-2A202603788",
+    "NguyenGiaNam-2A202603761",
+    "DaoNgocHan-2A202603779",
+    "TranTrongDucTai-2A202603732"
+  ],
+  "incident": "S7",
+  "decision_v1": "Tiếp tục",
+  "decision_v2": "Tiếp tục",
   "three_lines": {
-    "environment_assumption": "",
-    "reduce_or_prevent": "",
-    "measure_in_pilot": ""
+    "environment_assumption": "Thiết kế giả định người nhận quà chưa đồng ý chia sẻ PII với hãng và hợp đồng chỉ cho phép bốn trường vận hành.",
+    "reduce_or_prevent": "Allowlist trong notify_carrier thực sự ngăn PII ra hãng; monitor carrier_outbound_pii_rate chỉ giảm thời gian phát hiện.",
+    "measure_in_pilot": "Cần đo consent, dữ liệu PII thật, mọi kênh outbound, số lộ PII và thời gian phát hiện/phản ứng trước Bước đánh giá 2."
   }
 }
