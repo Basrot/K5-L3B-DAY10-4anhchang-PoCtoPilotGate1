@@ -6,7 +6,7 @@
 - Lớp: `L3A` / `L3B`: `L3B`
 - Repo của bàn: `K5-<L3A|L3B>-DAY10-<TenNhom>-PoCtoPilotGate1`:
   `K5-L3B-DAY10-4anhchang-PoCtoPilotGate1`
-- Thẻ sự cố đã bốc (S1–S8): S7
+- Thẻ sự cố đã bốc (S1–S8): `S7`
 
 ## Thành viên
 
@@ -15,7 +15,7 @@ Họ tên đầy đủ và MSSV của **mọi** thành viên; bàn 3 người th
 | STT | Họ và tên | MSSV | Vai | Trưởng nhóm |
 | --: | --------- | ---- | --- | :---------: |
 |   1 | Thiều Thế Ngọc | 2A202603788 | Kỹ sư cổng |             |
-|   2 | Nguyễn Gia Nam | 2A202603761 | Kỹ sư cổng |             |
+|   2 | Nguyễn Gia Nam | 2A202603761 | Kỹ sư cổng |      x      |
 |   3 | Đào Ngọc Hân | 2A202603779 | Sản phẩm và kinh doanh |             |
 |   4 | Trần Trọng Đức Tài | 2A202603732 | Vận hành và pháp lý |             |
 
@@ -65,19 +65,23 @@ Một điều học được: Mốc báo cáo và trace giúp tìm ra bước sa
 
 ### Phần việc phụ trách
 
-Sản phẩm và kinh doanh: Phiếu A, tiêu chí đã ký, bản đồ dữ liệu, cổng `business`, quyết định v1/v2 và phần `config/acceptance_criteria.json`.
+Sản phẩm và kinh doanh: đồng chốt tiêu chí chấp nhận (Phiếu A), bản đồ dữ liệu và ví dụ drift (`B3`), Pre-mortem lăng kính kinh doanh (`B6`), cổng `business` trong `config/operating_gates.json` và `B7.4`, đồng bộ số liệu Runbook 1–3, chốt cổng vòng 1 (`lab10.checkpoint`), Quyết định Gate 1 v1 (`B8`), rà soát hoàn thiện Phiếu C (`C0`, `C2`, `C5–C9`, `C12`), Quyết định v2 + ba dòng bắt buộc (`submission/submission.json`) và đồng bộ `submission/` chuẩn LF (`check_submission --collect`).
 
 ### Đóng góp cụ thể
 
-Chưa ghi ở phiên bản này; bổ sung khi hoàn thành công việc.
+- Thiết lập 4 cổng kinh doanh trong `config/operating_gates.json` mục `business` dựa trên ước lượng Fermi từ `ops_facts`/`ops_limits`: `daily_refund_cap_vnd = 1.500.000đ` (75% ngân sách Finance `2.000.000đ`), `cost_budget_per_ticket_vnd = 1.100đ` (dự phòng `400đ` các bước sau để không vượt trần LLM `1.500đ`), `pilot_scope` 4 kho đơn lẻ `["HN", "HCM", "DN", "CT"]` (loại chủ động kho sỉ `HCM-B2B` ≥ 2 triệu gây lỗ), `roi_min = 0.2`; đồng bộ lại 3 dòng con số trong Runbook 1–3 cho khớp config.
+- Hoàn thiện Bản đồ dữ liệu & Concept Drift `REFUND-v4` (ngày `2026-12-01`) tại `B3`, bổ sung dòng rủi ro kinh doanh `HCM-B2B`/trần LLM vào Pre-mortem `B6`.
+- Chạy `lab10.checkpoint` chốt mốc `prepared` (hash `3ea4677b`), chạy đối chiếu `base · prepared` và `base · after`, điền nhật ký `B0` và viết toàn bộ Quyết định Gate 1 · v1 (`Tiếp tục`) tại `B8`.
+- Kiểm tra toàn vẹn bài nộp cuối buổi trên thẻ `S7`, phát hiện và xử lý lỗi lệch hash CRLF/LF + khôi phục đầy đủ `journal.jsonl` của cả nhóm, hoàn thiện các mục còn thiếu trong Phiếu C (`C0`, `C2`, `C5–C9`, `C12`) và đồng bộ ba dòng bắt buộc với `submission/submission.json`, chạy `lab10.grade --incident S7` (`PASS-VISIBLE`) và `lab10.check_submission --collect` (`ĐỦ THÀNH PHẦN`).
+- *Ghi chú sử dụng AI (`RULES.md`):* Có sử dụng trợ lý AI theo phương pháp hỏi đáp Socratic để hiểu khái niệm thống kê (khoảng tin cậy, `pass^k`, `escalation_rate`), kiểm chứng tính toán Fermi cho chi phí/ROI, rà soát độ nhất quán câu chữ giữa các phiếu và kiểm tra lỗi kỹ thuật Git/hash LF.
 
 ### Bằng chứng
 
-Mã commit: … · Mã lần chạy: `runs/<mã>` · Dòng trong phiếu: A1–A5, B3, B7.4, B8, C5, C12
+Mã commit: `0d373be`, `9d203a2`, `305d6e7` (và commit hoàn thiện cuối buổi) · Mã lần chạy: `R-base-prepared-20261119-162423-64330d`, `R-base-after-20261119-162757-64330d`, `R-S7-grade-20261119-165927-37dae7`, `R-base-after-20261119-165638-f9f77e` · Dòng trong phiếu: A1–A5 (đồng ký `4e9908d`), B0, B3, B6, B7.4, B8, C0, C2, C5–C9, C12 · File: `config/operating_gates.json`, `config/round1.lock`, `submission/submission.json`.
 
 ### Exit ticket
 
-Một điều học được: … · Một điều còn chưa chắc: …
+Một điều học được: Quyết định đưa AI từ PoC sang Pilot không thể chỉ nhìn `pass_rate` mà phải đặt tiêu chí bằng ước lượng kinh tế thực tế (chi phí AI + công người duyệt + phí giữ chỗ + thiệt hại hoàn oan/PII) trước khi đo, và các cổng phòng ngừa ngoài model như allowlist (`notify_carrier`) và khoanh vùng `pilot_scope` có thể NGĂN hẳn thiệt hại ngay cả trước khi sự cố xảy ra. · Một điều còn chưa chắc: Khi triển khai thật từ `2026-12-01` với chính sách `REFUND-v4` (hạ hạn mức tự động xuống `100.000đ`), tỷ lệ đơn đẩy sang người duyệt và tải hàng chờ giờ cao điểm ngoài thực tế sẽ tăng mạnh tới mức nào và có cần điều chỉnh lại số người trực hay `pilot_scope` không.
 
 ## TranTrongDucTai-2A202603732
 

@@ -10,8 +10,8 @@
   "decision_v1": "Tiếp tục",
   "decision_v2": "Tiếp tục",
   "three_lines": {
-    "environment_assumption": "Thiết kế giả định người nhận quà chưa đồng ý chia sẻ PII với hãng và hợp đồng chỉ cho phép bốn trường vận hành.",
-    "reduce_or_prevent": "Allowlist trong notify_carrier thực sự ngăn PII ra hãng; monitor carrier_outbound_pii_rate chỉ giảm thời gian phát hiện.",
-    "measure_in_pilot": "Cần đo consent, dữ liệu PII thật, mọi kênh outbound, số lộ PII và thời gian phát hiện/phản ứng trước Bước đánh giá 2."
+    "environment_assumption": "Thiết kế giả định mọi trao đổi gửi sang hãng vận chuyển đều đi qua đúng tool notify_carrier (tuân thủ allowlist tối đa 4 trường carrier_notice_fields) và không có kênh phụ/nhân viên tự chép SĐT, tên, địa chỉ người nhận quà ra ngoài khi chưa có đồng ý.",
+    "reduce_or_prevent": "Cổng allowlist trong write_gate nhánh notify_carrier thực sự NGĂN hẳn lộ PII trong kênh này (đưa pii_leaks từ 30 về 0 trên S7 vì chỉ xuất 3 trường xác minh order_id, parcel_id, delay_days, không dựa vào regex dễ sót/nhầm mã vận đơn S7-05); còn monitor carrier_outbound_pii_rate (sáng đèn 0.875 vs 0.509) chỉ GIẢM thời gian phát hiện rủi ro tái diễn.",
+    "measure_in_pilot": "Trước Bước đánh giá 2 (2026-12-01), cần đo trên dữ liệu thật số vụ lộ PII thực tế trên mọi kênh outbound (mục tiêu = 0), tỷ lệ đồng ý chia sẻ dữ liệu của người nhận quà, số lần carrier_outbound_pii_rate > 0, thời gian dập công tắc (mục tiêu <= 5 phút) cùng chi phí/ticket (<= 8.000đ) và ROI (>= 0,20) khi lượng đơn biến động."
   }
 }
