@@ -2,9 +2,10 @@
 
 ## Thông tin nhóm
 
-- Tên nhóm (`TenNhom`, không dấu, không khoảng trắng):
-- Lớp: `L3A` / `L3B`
+- Tên nhóm (`TenNhom`, không dấu, không khoảng trắng): `4anhchang`
+- Lớp: `L3A` / `L3B`: `L3B`
 - Repo của bàn: `K5-<L3A|L3B>-DAY10-<TenNhom>-PoCtoPilotGate1`
+  `K5-L3B-DAY10-4anhchang-PoCtoPilotGate1`
 - Thẻ sự cố đã bốc (S1–S8):
 
 ## Thành viên
@@ -13,10 +14,10 @@ Họ tên đầy đủ và MSSV của **mọi** thành viên; bàn 3 người th
 
 | STT | Họ và tên | MSSV | Vai | Trưởng nhóm |
 | --: | --------- | ---- | --- | :---------: |
-|   1 |           |      |     |             |
-|   2 |           |      |     |             |
-|   3 |           |      |     |             |
-|   4 |           |      |     |             |
+|   1 | Thiều Thế Ngọc | 2A202603788 | Kỹ sư cổng |             |
+|   2 | Nguyễn Gia Nam | 2A202603761 | Kỹ sư cổng |             |
+|   3 | Đào Ngọc Hân | 2A202603779 | Sản phẩm và kinh doanh |             |
+|   4 | Trần Trọng Đức Tài | 2A202603732 | Vận hành và pháp lý |             |
 
 Ghi `members` trong `submission/submission.json` theo dạng `"HoVaTen-MSSV"`, khớp bảng trên.
 
@@ -24,20 +25,74 @@ Ghi `members` trong `submission/submission.json` theo dạng `"HoVaTen-MSSV"`, k
 
 Mỗi thành viên tự viết một mục bên dưới (chép mẫu, đổi tiêu đề thành họ tên không dấu và MSSV, ví dụ `## NguyenVanAn-20241234`).
 
-## HoVaTen-MSSV
+## ThieuTheNgoc-2A202603788
 
 ### Phần việc phụ trách
 
-Vai trong bàn; câu nào của đề, mục nào của phiếu A/B/C, file nào (`lab10/guards.py`, `config/operating_gates.json`, …).
+Kỹ sư cổng: viết cổng trong `lab10/guards.py`; chủ trì các cổng vòng 1, trace, behavioral test và Phiếu B mục B7.1–B7.3.
 
 ### Đóng góp cụ thể
 
-...
+Chưa ghi ở phiên bản này; bổ sung khi hoàn thành công việc.
 
 ### Bằng chứng
 
-Mã commit, mã lần chạy (`runs/<mã>`), dòng trong phiếu.
+Mã commit: … · Mã lần chạy: `runs/<mã>` · Dòng trong phiếu: B7.1–B7.3
 
 ### Exit ticket
 
-Một điều học được, một điều còn chưa chắc.
+Một điều học được: … · Một điều còn chưa chắc: …
+
+## NguyenGiaNam-2A202603761
+
+### Phần việc phụ trách
+
+Kỹ sư cổng phụ trách đo lường và phân tích trace: chạy các mốc, đọc `T-002@55`, B0–B2, trace thẻ, thêm chỉ số trong `lab10/monitors.py` và Phiếu C mục C1–C2, C8.
+
+### Đóng góp cụ thể
+
+Chưa ghi ở phiên bản này; bổ sung khi hoàn thành công việc.
+
+### Bằng chứng
+
+Mã commit: … · Mã lần chạy: `runs/<mã>` · Dòng trong phiếu: B0–B2, C1–C2, C8
+
+### Exit ticket
+
+Một điều học được: … · Một điều còn chưa chắc: …
+
+## DaoNgocHan-2A202603779
+
+### Phần việc phụ trách
+
+Sản phẩm và kinh doanh: Phiếu A, tiêu chí đã ký, bản đồ dữ liệu, cổng `business`, quyết định v1/v2 và phần `config/acceptance_criteria.json`.
+
+### Đóng góp cụ thể
+
+Chưa ghi ở phiên bản này; bổ sung khi hoàn thành công việc.
+
+### Bằng chứng
+
+Mã commit: … · Mã lần chạy: `runs/<mã>` · Dòng trong phiếu: A1–A5, B3, B7.4, B8, C5, C12
+
+### Exit ticket
+
+Một điều học được: … · Một điều còn chưa chắc: …
+
+## TranTrongDucTai-2A202603732
+
+### Phần việc phụ trách
+
+Vận hành và pháp lý: HAZOP, checklist 9 nhóm, cổng `operations` và `legal`, runbook, giờ cao điểm, HAZOP của thẻ, gom bài nộp và `submission/submission.json`.
+
+### Đóng góp cụ thể
+
+Chưa ghi ở phiên bản này; bổ sung khi hoàn thành công việc.
+
+### Bằng chứng
+
+Mã commit: … · Mã lần chạy: `runs/<mã>` · Dòng trong phiếu: B4–B5, B7.5–B7.6, C4, C10–C12
+
+### Exit ticket
+
+Một điều học được: … · Một điều còn chưa chắc: …
